@@ -1,0 +1,6 @@
+enum SettingsEnum{
+  SOUND_ACTIVATE,
+  MUSIC_ACTIVATE,
+  AD_ACTIVATE,
+  
+}
