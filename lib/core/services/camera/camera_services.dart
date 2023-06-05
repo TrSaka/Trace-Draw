@@ -11,11 +11,9 @@ class CameraService {
 
   CameraService._();
 
-  static late CameraController cameraController;
-
   Future getPermission() async {
     await Permission.camera.request();
-    if (await Permission.camera.request().isGranted) {
+    if (await Permission.camera.request().isGranted == true) {
       final cameras = await availableCameras();
       return cameras;
     } else {
@@ -24,20 +22,24 @@ class CameraService {
     }
   }
 
-  Future<void> initalizeCamera() async {
+  Future? initalizeCamera(cameraController) async {
     final cameras = await getPermission();
     if (cameras != null) {
       cameraController =
           CameraController(cameras[0], ResolutionPreset.medium); //selectable
       await cameraController.initialize();
+      return cameraController;
     } else {
       debugPrint('Permission has not been given');
+      return null;
     }
   }
 
-  Future<void> disposeCameraController() async {
-    cameraController.value.isInitialized == true
-        ? await cameraController.dispose()
+  Future<void> disposeCameraController(
+      CameraController? cameraController) async {
+    cameraController?.value.isInitialized == true ||
+            cameraController?.value != null
+        ? await cameraController!.dispose()
         : null;
   }
 }

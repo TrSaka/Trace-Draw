@@ -1,0 +1,95 @@
+import 'package:easy_draw/core/base/view/base_view.dart';
+import 'package:easy_draw/core/product/view_model/home/home_view_model.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+
+import '../../../widgets/ad_remove_button.dart';
+import '../../../widgets/loader.dart';
+
+class HomeView extends ConsumerStatefulWidget {
+  const HomeView({super.key, this.pageIndex});
+
+  @override
+  ConsumerState<HomeView> createState() => _HomeViewState();
+  final int? pageIndex;
+}
+
+class _HomeViewState extends ConsumerState<HomeView> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  HomeViewModel _viewModel = HomeViewModel();
+
+  @override
+  Widget build(BuildContext context) {
+    bool staticAdState =
+        ref.watch(_viewModel.adMobBannerProvider).adMobBannerState;
+    BannerAd? staticAds = ref.watch(_viewModel.adMobBannerProvider).staticAds;
+    return BaseView(
+      viewModel: _viewModel,
+      onModelReady: (model) async {
+        await ref.read(_viewModel.adMobBannerProvider).showBanner();
+        _viewModel = model;
+        if (widget.pageIndex != null) {
+          _viewModel.changeSelectedIndex(widget.pageIndex);
+        } else {
+          debugPrint("Routed by Menu");
+        }
+      },
+      onPageBuilder: (context, value) {
+        return Observer(builder: (context) {
+          return Scaffold(
+            appBar: AppBar(
+              actions: const [AdRemoveButton()],
+              centerTitle: true,
+              backgroundColor: Colors.transparent,
+              title: Center(
+                child: staticAdState == true
+                    ? SizedBox(
+                        height: staticAds!.size.height.toDouble(),
+                        width: staticAds.size.width.toDouble(),
+                        child: AdWidget(ad: staticAds),
+                      )
+                    : const LoaderWidget(),
+              ),
+            ),
+            bottomNavigationBar: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 14.0, vertical: 0),
+              child: GNav(
+                selectedIndex: _viewModel.selectedIndex,
+                rippleColor: Colors.grey.shade800,
+                hoverColor: Colors.grey.shade700,
+                gap: 12,
+                duration: const Duration(milliseconds: 300),
+                haptic: false, //phone's vibration off
+                tabBackgroundColor: Colors.grey.shade300,
+                activeColor: Colors.black,
+                padding: const EdgeInsets.all(16),
+                onTabChange: (newIndex) {
+                  _viewModel.changeSelectedIndex(newIndex);
+                },
+                tabs: const [
+                  GButton(
+                    icon: Icons.home,
+                    text: 'Home',
+                  ),
+                  GButton(
+                    icon: Icons.settings,
+                    text: 'Settings',
+                  ),
+                ],
+              ),
+            ),
+            body: _viewModel.applicationScreens[_viewModel.selectedIndex],
+          );
+        });
+      },
+    );
+  }
+}

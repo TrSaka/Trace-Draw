@@ -1,6 +1,4 @@
 // ignore_for_file: unrelated_type_equality_checks
-
-import 'dart:convert';
 import 'package:easy_draw/core/constants/enum/setting_enums.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

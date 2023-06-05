@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "556734116181",
+    "project_id": "drawapplication-57442",
+    "storage_bucket": "drawapplication-57442.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556734116181:android:86ac489772fd6277f9bfdc",
+        "android_client_info": {
+          "package_name": "com.drawapp.easy_draw"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "556734116181-ns5dla1st8ikatelke2jkkbr52tc69i0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVDaucVlEG-J8UdY7ZFvdDB_W6VsDF-mA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "556734116181-ns5dla1st8ikatelke2jkkbr52tc69i0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

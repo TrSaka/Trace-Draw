@@ -9,6 +9,22 @@ part of 'draw_view_model.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$DrawViewModel on _DrawViewModelBase, Store {
+  late final _$containerOpacityAtom =
+      Atom(name: '_DrawViewModelBase.containerOpacity', context: context);
+
+  @override
+  double get containerOpacity {
+    _$containerOpacityAtom.reportRead();
+    return super.containerOpacity;
+  }
+
+  @override
+  set containerOpacity(double value) {
+    _$containerOpacityAtom.reportWrite(value, super.containerOpacity, () {
+      super.containerOpacity = value;
+    });
+  }
+
   late final _$containerTopAtom =
       Atom(name: '_DrawViewModelBase.containerTop', context: context);
 
@@ -88,6 +104,28 @@ mixin _$DrawViewModel on _DrawViewModelBase, Store {
   }
 
   @override
+  dynamic increaseContainerOpacity() {
+    final _$actionInfo = _$_DrawViewModelBaseActionController.startAction(
+        name: '_DrawViewModelBase.increaseContainerOpacity');
+    try {
+      return super.increaseContainerOpacity();
+    } finally {
+      _$_DrawViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic decreaseContainerOpacity() {
+    final _$actionInfo = _$_DrawViewModelBaseActionController.startAction(
+        name: '_DrawViewModelBase.decreaseContainerOpacity');
+    try {
+      return super.decreaseContainerOpacity();
+    } finally {
+      _$_DrawViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic resizeContainer(dynamic scale) {
     final _$actionInfo = _$_DrawViewModelBaseActionController.startAction(
         name: '_DrawViewModelBase.resizeContainer');
@@ -112,6 +150,7 @@ mixin _$DrawViewModel on _DrawViewModelBase, Store {
   @override
   String toString() {
     return '''
+containerOpacity: ${containerOpacity},
 containerTop: ${containerTop},
 containerLeft: ${containerLeft},
 containerHeight: ${containerHeight},
