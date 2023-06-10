@@ -4,9 +4,11 @@ mixin AppThemeLight implements ThemeData {
   static ThemeData theme = ThemeData(
     //add sizes
     primaryColor: Colors.white,
-    backgroundColor: Colors.white,
+
     appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.white,
+      centerTitle: true,
+      
       elevation: 0,
     ),
     visualDensity: VisualDensity.adaptivePlatformDensity,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class SettingsView extends StatefulWidget {
   const SettingsView({super.key});
 
@@ -9,23 +8,17 @@ class SettingsView extends StatefulWidget {
 }
 
 class _SettingsViewState extends State<SettingsView> {
-
-
   @override
   void initState() {
     super.initState();
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Column(
-        children:const [
-      
-        ],
+      body: const Column(
+        children:  [],
       ),
       backgroundColor: Colors.white,
     );

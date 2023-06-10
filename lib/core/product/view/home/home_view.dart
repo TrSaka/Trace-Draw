@@ -5,9 +5,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-
+import '../../../constants/enum/setting_enums.dart';
+import '../../../services/cache/locale_management.dart';
 import '../../../widgets/ad_remove_button.dart';
-import '../../../widgets/loader.dart';
 
 class HomeView extends ConsumerStatefulWidget {
   const HomeView({super.key, this.pageIndex});
@@ -27,6 +27,9 @@ class _HomeViewState extends ConsumerState<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    bool? premiumState =
+        LocalManagement.instance.fetchBoolean(SettingsEnum.AD_PREMIUM);
+
     bool staticAdState =
         ref.watch(_viewModel.adMobBannerProvider).adMobBannerState;
     BannerAd? staticAds = ref.watch(_viewModel.adMobBannerProvider).staticAds;
@@ -44,20 +47,9 @@ class _HomeViewState extends ConsumerState<HomeView> {
       onPageBuilder: (context, value) {
         return Observer(builder: (context) {
           return Scaffold(
-            appBar: AppBar(
-              actions: const [AdRemoveButton()],
-              centerTitle: true,
-              backgroundColor: Colors.transparent,
-              title: Center(
-                child: staticAdState == true
-                    ? SizedBox(
-                        height: staticAds!.size.height.toDouble(),
-                        width: staticAds.size.width.toDouble(),
-                        child: AdWidget(ad: staticAds),
-                      )
-                    : const LoaderWidget(),
-              ),
-            ),
+            appBar: premiumState != true
+                ? defaultAppBar(staticAdState, staticAds)
+                : premiumNoAppBar(),
             bottomNavigationBar: Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 14.0, vertical: 0),
@@ -90,6 +82,31 @@ class _HomeViewState extends ConsumerState<HomeView> {
           );
         });
       },
+    );
+  }
+
+  AppBar defaultAppBar(bool staticAdState, BannerAd? staticAds) {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      actions: const [AdRemoveButton()],
+      centerTitle: true,
+      backgroundColor: Colors.transparent,
+      title: Center(
+        child: staticAdState == true
+            ? SizedBox(
+                height: staticAds!.size.height.toDouble(),
+                width: staticAds.size.width.toDouble(),
+                child: AdWidget(ad: staticAds),
+              )
+            : const SizedBox(),
+      ),
+    );
+  }
+
+  AppBar premiumNoAppBar() {
+    return AppBar(
+
+      toolbarHeight: 0,
     );
   }
 }

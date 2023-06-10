@@ -3,13 +3,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:camera/camera.dart';
 
 class CameraService {
-  static CameraService? _instance;
 
-  factory CameraService() {
-    return _instance ?? CameraService._();
-  }
-
-  CameraService._();
 
   Future getPermission() async {
     await Permission.camera.request();

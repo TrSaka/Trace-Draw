@@ -49,14 +49,8 @@ class _$AppRouter extends RootStackRouter {
   @override
   List<RouteConfig> get routes => [
         RouteConfig(
-          '/#redirect',
-          path: '/',
-          redirectTo: 'home_view',
-          fullMatch: true,
-        ),
-        RouteConfig(
           Splash_view.name,
-          path: '/splash-view',
+          path: '/',
         ),
         RouteConfig(
           HomeRoute.name,
@@ -75,7 +69,7 @@ class Splash_view extends PageRouteInfo<void> {
   const Splash_view()
       : super(
           Splash_view.name,
-          path: '/splash-view',
+          path: '/',
         );
 
   static const String name = 'Splash_view';

@@ -3,6 +3,6 @@
 enum SettingsEnum{
   SOUND_ACTIVATE,
   MUSIC_ACTIVATE,
-  AD_ACTIVATE,
+  AD_PREMIUM,
   
 }

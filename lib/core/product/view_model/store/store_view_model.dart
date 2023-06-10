@@ -14,13 +14,15 @@ abstract class _StoreViewModelBase with Store {
     'FOOD',
     'EMOJI',
     'UNICORN',
+    'ABC',
+    'MANDALA'
   ];
 
   TabBar customTabs() {
     return TabBar(
       isScrollable: true,
       tabs: [
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < categories.length; i++)
           Tab(
             text: categories[i],
           )

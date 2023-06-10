@@ -22,8 +22,8 @@ class LocalManagement {
     await _preferences!.setBool(key.toString(), value);
   }
 
-  Future<void> fetchBoolean(SettingsEnum key) async {
-      _preferences?.getBool(key.toString());
+  bool? fetchBoolean(SettingsEnum key)  {
+     return _preferences?.getBool(key.toString());
   }
 
   Future<void> deleteBoolean(SettingsEnum key) async {

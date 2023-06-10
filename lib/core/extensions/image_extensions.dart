@@ -8,4 +8,8 @@ extension ImageExt on dynamic {
       fit: BoxFit.cover,
     );
   }
+
+  get toPng {
+    return Image.asset(this,filterQuality: FilterQuality.high, fit: BoxFit.cover);
+  }
 }
