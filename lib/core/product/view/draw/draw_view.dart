@@ -47,6 +47,7 @@ class _DrawViewState extends ConsumerState<DrawView> {
       },
       onPageBuilder: (context, value) {
         return Scaffold(
+          backgroundColor: Colors.transparent,
           floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
           floatingActionButton: Column(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -85,10 +86,11 @@ class _DrawViewState extends ConsumerState<DrawView> {
                 child: Stack(
                   children: [
                     _isCameraInitialized
-                        ? SizedBox(
-                            height: MediaQuery.of(context).size.height,
-                            width: MediaQuery.of(context).size.width,
-                            child: CameraPreview(_cameraController!),
+                        ? Center(
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: CameraPreview(_cameraController!),
+                            ),
                           )
                         : const LoaderWidget(),
                     Positioned(

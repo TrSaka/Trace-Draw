@@ -67,6 +67,7 @@ class CloudFireStoreService extends BaseCloudService {
           .doc(AppConstants.firebasePremium)
           .get();
 
+      debugPrint("USER IP ADDRESS => $ipAddress");
       if (data.data() != null && data.data()!.containsKey(ipAddress) == true) {
         await LocalManagement.instance.deleteBoolean(SettingsEnum.AD_PREMIUM);
 
@@ -96,8 +97,7 @@ class CloudFireStoreService extends BaseCloudService {
       return await firestore
           .collection(AppConstants.firebaseApplication)
           .doc(AppConstants.firebasePremium)
-          .set({ipAddress: '$ipAddress'});
-      
+          .set({ipAddress: ipAddress});
     } else {
       debugPrint("Ip Address ERR:");
     }

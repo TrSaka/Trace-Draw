@@ -8,6 +8,16 @@ class AdRemoveButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return version1();
+  }
+
+  SizedBox version1() {
+    return const SizedBox();
+  }
+
+  //We will use in update 2 :)
+
+  Padding version2() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: CircleAvatar(

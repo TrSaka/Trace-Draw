@@ -8,14 +8,15 @@ class StoreViewModel = _StoreViewModelBase with _$StoreViewModel;
 
 abstract class _StoreViewModelBase with Store {
   List<String> categories = [
-    'sketchs',
     'ANIMALS',
-    'EASY',
-    'FOOD',
-    'EMOJI',
-    'UNICORN',
     'ABC',
-    'MANDALA'
+    'CARTOON',
+    'EASY',
+    'EMOJI',
+    'FOOD',
+    'MANDALA',
+    'LOVE',
+    'UNICORN',
   ];
 
   TabBar customTabs() {

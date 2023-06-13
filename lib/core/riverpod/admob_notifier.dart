@@ -1,3 +1,4 @@
+import 'package:easy_draw/core/constants/app/app_constants.dart';
 import 'package:easy_draw/core/constants/enum/setting_enums.dart';
 import 'package:easy_draw/core/services/cache/locale_management.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class AdmobProvider extends ChangeNotifier {
     if (premiumState != true) {
       staticAds = BannerAd(
         size: AdSize.banner,
-        adUnitId: 'ca-app-pub-3940256099942544/6300978111',
+        adUnitId: AppConstants.defaultAdMobID,
         request: const AdRequest(),
         listener: BannerAdListener(
           onAdLoaded: (ad) {
@@ -29,6 +30,9 @@ class AdmobProvider extends ChangeNotifier {
             ad.dispose();
             setBannerState(false);
             debugPrint("ERRR$error");
+
+            showBanner();
+            setBannerState(false);
           },
         ),
       );

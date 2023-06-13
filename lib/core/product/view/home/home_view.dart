@@ -18,21 +18,21 @@ class HomeView extends ConsumerStatefulWidget {
 }
 
 class _HomeViewState extends ConsumerState<HomeView> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
   HomeViewModel _viewModel = HomeViewModel();
 
   @override
   Widget build(BuildContext context) {
     bool? premiumState =
         LocalManagement.instance.fetchBoolean(SettingsEnum.AD_PREMIUM);
-
     bool staticAdState =
         ref.watch(_viewModel.adMobBannerProvider).adMobBannerState;
     BannerAd? staticAds = ref.watch(_viewModel.adMobBannerProvider).staticAds;
+
+    void reloadBanner() async {
+      setState(() {});
+      await ref.read(_viewModel.adMobBannerProvider).showBanner();
+    }
+
     return BaseView(
       viewModel: _viewModel,
       onModelReady: (model) async {
@@ -42,6 +42,11 @@ class _HomeViewState extends ConsumerState<HomeView> {
           _viewModel.changeSelectedIndex(widget.pageIndex);
         } else {
           debugPrint("Routed by Menu");
+        }
+        bool state = ref.watch(_viewModel.adMobBannerProvider).adMobBannerState;
+
+        if (state == false) {
+          reloadBanner();
         }
       },
       onPageBuilder: (context, value) {
@@ -66,16 +71,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                 onTabChange: (newIndex) {
                   _viewModel.changeSelectedIndex(newIndex);
                 },
-                tabs: const [
-                  GButton(
-                    icon: Icons.home,
-                    text: 'Home',
-                  ),
-                  GButton(
-                    icon: Icons.settings,
-                    text: 'Settings',
-                  ),
-                ],
+                tabs: const [],
               ),
             ),
             body: _viewModel.applicationScreens[_viewModel.selectedIndex],
@@ -90,7 +86,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
       automaticallyImplyLeading: false,
       actions: const [AdRemoveButton()],
       centerTitle: true,
-      backgroundColor: Colors.transparent,
+      backgroundColor: const Color.fromARGB(0, 64, 63, 63),
       title: Center(
         child: staticAdState == true
             ? SizedBox(
@@ -104,9 +100,6 @@ class _HomeViewState extends ConsumerState<HomeView> {
   }
 
   AppBar premiumNoAppBar() {
-    return AppBar(
-
-      toolbarHeight: 0,
-    );
+    return AppBar(toolbarHeight: 0);
   }
 }
