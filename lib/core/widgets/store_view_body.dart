@@ -23,7 +23,7 @@ class StoreBody extends ConsumerStatefulWidget {
 class _StoreBodyState extends ConsumerState<StoreBody> {
   bool _isInterstitialAdReady = false;
   InterstitialAd? _interstitialAd;
-  final String _interstitialAdUnitId = AppConstants.defaultAdmobID2;
+  final String _interstitialAdUnitId = AppConstants.originalAdMobID2;
 
   StoreViewModel _viewModel = StoreViewModel();
 

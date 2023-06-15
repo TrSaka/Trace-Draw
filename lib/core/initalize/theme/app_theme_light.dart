@@ -8,7 +8,6 @@ mixin AppThemeLight implements ThemeData {
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.white,
       centerTitle: true,
-      
       elevation: 0,
     ),
     visualDensity: VisualDensity.adaptivePlatformDensity,

@@ -16,7 +16,7 @@ class AdmobProvider extends ChangeNotifier {
     if (premiumState != true) {
       staticAds = BannerAd(
         size: AdSize.banner,
-        adUnitId: AppConstants.defaultAdMobID,
+        adUnitId: AppConstants.originalAdMobID,
         request: const AdRequest(),
         listener: BannerAdListener(
           onAdLoaded: (ad) {
