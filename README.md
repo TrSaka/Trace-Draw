@@ -1,3 +1,3 @@
-# easy_draw
+# TRACE DRAW
 
-IN GP STORE ASAP !!!
+IN GP STORE from SAKA STUDIO
