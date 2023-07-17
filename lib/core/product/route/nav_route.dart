@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 class NavRoute {
   final PageRouteInfo? route;
 
+  
+
   NavRoute(this.route);
 
   toPush(BuildContext context) {

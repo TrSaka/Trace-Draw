@@ -1,6 +1,4 @@
 // ignore_for_file: library_private_types_in_public_api
-
-import 'package:easy_draw/core/product/route/nav_route.dart';
 import 'package:easy_draw/core/product/route/router.dart';
 import 'package:easy_draw/core/riverpod/android_provider.dart';
 import 'package:easy_draw/core/riverpod/firebase_provider.dart';
@@ -9,6 +7,8 @@ import 'package:easy_draw/core/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobx/mobx.dart';
+
+import '../../route/nav_route.dart';
 part 'splash_view_model.g.dart';
 
 class SplashViewModel = _SplashViewModelBase with _$SplashViewModel;
@@ -105,6 +105,6 @@ abstract class _SplashViewModelBase with Store {
   }
 
   routeToMenu(context) {
-    NavRoute(HomeRoute(pageIndex: 0)).toPush(context);
+    NavRoute(HomeRoute(pageIndex: 0)).toPushReplecement(context);
   }
 }

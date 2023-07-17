@@ -5,9 +5,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../constants/enum/setting_enums.dart';
 import '../../../services/cache/locale_management.dart';
 import '../../../widgets/ad_remove_button.dart';
+import 'package:gdpr_dialog/gdpr_dialog.dart';
 
 class HomeView extends ConsumerStatefulWidget {
   const HomeView({super.key, this.pageIndex});
@@ -18,7 +20,42 @@ class HomeView extends ConsumerStatefulWidget {
 }
 
 class _HomeViewState extends ConsumerState<HomeView> {
+  bool gdprAccepted = false;
+
   HomeViewModel _viewModel = HomeViewModel();
+
+  @override
+  void initState() {
+    checkGDPRStatus().then((value) {
+      if (value == false) {
+        GdprDialog.instance.resetDecision();
+        GdprDialog.instance
+            .showDialog(isForTest: false, testDeviceId: '')
+            .then((value) {
+          if (value == true) {}
+        });
+      } else {
+        print("GDPR ACCEPTED ALREADY");
+      }
+    });
+    super.initState();
+  }
+
+  Future checkGDPRStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool accepted = prefs.getBool('gdpr_accepted') ?? false;
+    setState(() {
+      gdprAccepted = accepted;
+    });
+  }
+
+  void acceptGDPR() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('gdpr_accepted', true);
+    setState(() {
+      gdprAccepted = true;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

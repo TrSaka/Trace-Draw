@@ -35,6 +35,8 @@ class CloudFireStoreService extends BaseCloudService {
           .doc(AppConstants.firebaseVersion)
           .get();
 
+      print("LATEST VERSION "+data.toString());
+
       String newVersion = data[AppConstants.latestVersion];
       List<String> newVersionParts =
           newVersion.split('.'); // Yeni sürüm numarasını parçalara ayırın

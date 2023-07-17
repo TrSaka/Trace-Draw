@@ -6,7 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../view_model/splash/splash_view_model.dart';
 
+
+
+
 class SplashView extends ConsumerStatefulWidget {
+  
   const SplashView({super.key});
 
   @override
