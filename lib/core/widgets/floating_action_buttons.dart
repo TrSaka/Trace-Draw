@@ -12,7 +12,7 @@ class ExitFloatingActionButton extends StatelessWidget {
     return FloatingActionButton(
         heroTag: 'exit_floating_action_button',
         onPressed: () {
-          NavRoute(HomeRoute(key: key, pageIndex: 0)).toPop(context);
+          NavRoute(HomeRoute(key: key, pageIndex: 0)).toPushReplecement(context);
         },
         child: const Icon(Icons.close_rounded));
   }

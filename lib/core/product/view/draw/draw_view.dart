@@ -63,7 +63,9 @@ class _DrawViewState extends ConsumerState<DrawView> {
                 callback: () => _viewModel.increaseContainerOpacity(),
                 position: 'increaser_floating_action_tag',
               ),
-              const ExitFloatingActionButton(),
+              const ExitFloatingActionButton(
+              
+              ),
             ],
           ),
           body: Observer(builder: (context) {
